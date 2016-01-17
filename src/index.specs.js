@@ -41,8 +41,8 @@ describe('Common Functions for working with \'process.env\'', () => {
       })
     })
 
-    describe('when comma seperated lists are enabled', () => {
-      const opts = { commaSeperated: true }
+    describe('when comma separated lists are enabled', () => {
+      const opts = { commaSeparated: true }
 
       it('should return an array of values', () => {
         addMockEnvVar(testVarKey, 'first,second,third')

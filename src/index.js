@@ -4,7 +4,7 @@ export function getEnvVar(key, fallback, opts={}) {
   if (opts.boolean && typeof value !== 'boolean')
     value = (value === 'true')
 
-  if (opts.commaSeperated && typeof value === 'string')
+  if (opts.commaSeparated && typeof value === 'string')
     value = value.split(',')
 
   return value
