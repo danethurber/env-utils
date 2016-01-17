@@ -1,0 +1,18 @@
+{
+  "name": "env-utils",
+  "version": "0.0.0",
+  "description": "Environment Utilities",
+  "main": "lib/index.js",
+  "scripts": {
+    "prepublish": "npm run compile",
+    "compile": "./node_modules/.bin/babel -d lib/ src/",
+    "test": "./node_modules/.bin/mocha"
+  },
+  "repository": "danethurber/env-utils.git",
+  "keywords": [
+    "env",
+    "process"
+  ],
+  "author": "Dane Thurber <dane.thurber@gmail.com> (http://github.com/danethurber)",
+  "license": "MIT"
+}
