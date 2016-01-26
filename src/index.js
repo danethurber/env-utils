@@ -1,4 +1,5 @@
-export function getEnvVar(key, fallback, opts={}) {
+export function getEnvVar(key, opts={}) {
+  const fallback = process.env['NODE_ENV'] === 'development' ? opts.devDefault : undefined
   let value = process.env[key] || fallback
 
   if (opts.boolean && typeof value !== 'boolean')
