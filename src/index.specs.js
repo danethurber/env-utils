@@ -27,6 +27,12 @@ describe('Common Functions for working with \'process.env\'', () => {
       expect(getEnvVar(testVarKey)).to.eql('some_value')
     })
 
+    it('should throw if a variable is undefined', () => {
+      expect(() => {
+        getEnvVar('SOMETHING_NOT_FOUND')
+      }).to.throw(/SOMETHING_NOT_FOUND is undefined/)
+    })
+
     describe('when boolean values are enabled', () => {
       const opts = { boolean: true }
 
@@ -57,16 +63,6 @@ describe('Common Functions for working with \'process.env\'', () => {
 
       it('should use the devDefault fallback', () => {
         expect(getEnvVar(testVarKey, { devDefault: 'fallback'})).to.eql('fallback')
-      })
-    })
-
-    describe('when NODE_ENV is production', () => {
-      beforeEach(() => {
-        addMockEnvVar('NODE_ENV', 'production')
-      })
-
-      it('should not use the devDefault fallback', () => {
-        expect(getEnvVar(testVarKey, { devDefault: 'fallback'})).to.be.undefined
       })
     })
   })
