@@ -33,6 +33,20 @@ describe('Common Functions for working with \'process.env\'', () => {
       }).to.throw(/SOMETHING_NOT_FOUND is undefined/)
     })
 
+    describe('when variable is optional', () => {
+      const opts = { optional: true }
+
+      it('should not throw', () => {
+        expect(() => {
+          getEnvVar('SOMETHING_NOT_FOUND', opts)
+        }).to.not.throw()
+      })
+
+      it('should return undefined', () => {
+        expect(getEnvVar('SOMETHING_NOT_FOUND', opts)).to.be.undefined
+      })
+    })
+
     describe('when boolean values are enabled', () => {
       const opts = { boolean: true }
 
