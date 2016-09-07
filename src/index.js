@@ -9,7 +9,7 @@ export function getEnvVar(key, opts={}) {
     value = (value === 'true')
 
   if (opts.commaSeparated && typeof value === 'string')
-    value = value.split(',')
+    value = value.split(',').map((element) => { return element.trim() })
 
   return value
 }

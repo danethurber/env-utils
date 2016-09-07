@@ -68,6 +68,15 @@ describe('Common Functions for working with \'process.env\'', () => {
         expect(envVar).to.be.an('array')
         expect(envVar).to.be.eql(['first', 'second', 'third'])
       })
+
+      it('should trim any values in the array', () => {
+        addMockEnvVar(testVarKey, 'first, second, third')
+
+        const envVar = getEnvVar(testVarKey, opts)
+
+        expect(envVar).to.be.an('array')
+        expect(envVar).to.be.eql(['first', 'second', 'third'])
+      })
     })
 
     describe('when NODE_ENV is development', () => {
