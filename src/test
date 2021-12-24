@@ -1,5 +1,5 @@
 import {expect} from 'chai'
-import {getEnvVar} from './'
+import {getEnvVar} from '.'
 
 describe('Common Functions for working with \'process.env\'', () => {
   let orgEnv
@@ -89,4 +89,4 @@ describe('Common Functions for working with \'process.env\'', () => {
       })
     })
   })
-})
+});

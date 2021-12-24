@@ -1,5 +1,0 @@
-./src/**/*.specs.js
-
---reporter spec
---require chai
---require babel/register
