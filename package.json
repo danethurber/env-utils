@@ -1,23 +1,33 @@
 {
-  "name": "env-utils",
-  "version": "2.2.1",
+  "name": "@bolajiolajide/env-utils",
+  "version": "1.0.0",
   "description": "Environment Utilities",
   "main": "lib/index.js",
   "scripts": {
-    "prepublish": "npm run compile",
-    "compile": "./node_modules/.bin/babel -d lib/ src/",
-    "test": "./node_modules/.bin/mocha"
+    "test": "jest"
   },
-  "repository": "danethurber/env-utils.git",
+  "repository": "git@github.com:BolajiOlajide/env-utils.git",
+  "homepage": "https://github.com/BolajiOlajide/env-utils",
   "keywords": [
     "env",
     "process"
   ],
+  "maintainers": [
+    {
+      "email": "25608335+BolajiOlajide@users.noreply.github.com",
+      "name": "Bolaji",
+      "url": "https://bolaji.de"
+    }
+  ],
   "author": "Dane Thurber <dane.thurber@gmail.com> (http://github.com/danethurber)",
   "license": "MIT",
   "devDependencies": {
-    "babel": "^5.4.7",
-    "chai": "^2.3.0",
-    "mocha": "^2.2.5"
+    "@types/jest": "27.0.3",
+    "@types/node": "17.0.4",
+    "babel": "5.4.7",
+    "jest": "27.4.5",
+    "ts-jest": "27.1.2",
+    "ts-node": "10.4.0",
+    "typescript": "4.5.4"
   }
 }
