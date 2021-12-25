@@ -823,7 +823,7 @@ atob@^2.1.2:
   resolved "https://registry.yarnpkg.com/atob/-/atob-2.1.2.tgz#6d9517eb9e030d2436666651e86bd9f6f13533c9"
   integrity sha512-Wm6ukoaOGJi/73p/cl2GvLjTI5JM1k/O14isD73YML8StrH/7/lRFgmg8nICZgD3bZZvjwCGxtMOD3wWNAu8cg==
 
-babel-core@^5.6.21:
+babel-core@^5.4.7:
   version "5.8.38"
   resolved "https://registry.yarnpkg.com/babel-core/-/babel-core-5.8.38.tgz#1fcaee79d7e61b750b00b8e54f6dfc9d0af86558"
   integrity sha1-H8ruedfmG3ULALjlT238nQr4ZVg=
@@ -1015,12 +1015,12 @@ babel-preset-jest@^27.4.0:
     babel-plugin-jest-hoist "^27.4.0"
     babel-preset-current-node-syntax "^1.0.0"
 
-babel@^5.4.7:
-  version "5.8.38"
-  resolved "https://registry.yarnpkg.com/babel/-/babel-5.8.38.tgz#dfb087c22894917c576fb67ce9cf328d458629fb"
-  integrity sha1-37CHwiiUkXxXb7Z86c8yjUWGKfs=
+babel@5.4.7:
+  version "5.4.7"
+  resolved "https://registry.yarnpkg.com/babel/-/babel-5.4.7.tgz#d97807d1c79849c2f6c56eeaca4329719a50af5e"
+  integrity sha1-2XgH0ceYScL2xW7qykMpcZpQr14=
   dependencies:
-    babel-core "^5.6.21"
+    babel-core "^5.4.7"
     chokidar "^1.0.0"
     commander "^2.6.0"
     convert-source-map "^1.1.0"
@@ -1028,10 +1028,9 @@ babel@^5.4.7:
     glob "^5.0.5"
     lodash "^3.2.0"
     output-file-sync "^1.1.0"
-    path-exists "^1.0.0"
     path-is-absolute "^1.0.0"
     slash "^1.0.0"
-    source-map "^0.5.0"
+    source-map "^0.4.0"
 
 babylon@^5.8.38:
   version "5.8.38"
@@ -3690,6 +3689,13 @@ source-map@0.1.32:
   version "0.1.32"
   resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.1.32.tgz#c8b6c167797ba4740a8ea33252162ff08591b266"
   integrity sha1-yLbBZ3l7pHQKjqMyUhYv8IWRsmY=
+  dependencies:
+    amdefine ">=0.0.4"
+
+source-map@^0.4.0:
+  version "0.4.4"
+  resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.4.4.tgz#eba4f5da9c0dc999de68032d8b4f76173652036b"
+  integrity sha1-66T12pwNyZneaAMti092FzZSA2s=
   dependencies:
     amdefine ">=0.0.4"
 

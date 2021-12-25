@@ -3,7 +3,7 @@ import type { EnvOptions, EnvValue } from './types';
 
 const trimElements = (element: string) => element.trim();
 
-const getEnvVar = (key: string, options: EnvOptions): EnvValue | EnvValue[] => {
+const getEnvVar = (key: string, options: EnvOptions = {}): EnvValue | EnvValue[] => {
   const fallback = process.env['NODE_ENV'] === 'development' ? options.devDefault : undefined;
   const envValue = process.env[key] === undefined ? fallback : process.env[key];
 
@@ -12,7 +12,7 @@ const getEnvVar = (key: string, options: EnvOptions): EnvValue | EnvValue[] => {
   const isString = typeof envValue === 'string';
 
   if (isOptionalAndUndefined || isUndefined) {
-    throw new Error(`${key} is undefined`);
+    throw new Error(`"${key}" is undefined`);
   }
 
   if (options.isBoolean && isString) {
@@ -24,7 +24,13 @@ const getEnvVar = (key: string, options: EnvOptions): EnvValue | EnvValue[] => {
   }
 
   if (options.isNumber && isString) {
-    return parseInt(envValue, 10);
+    const numericEnvValue = parseInt(envValue, 10);
+
+    if (isNaN(numericEnvValue)) {
+      throw new Error(`"${key}" is not a valid number`);
+    }
+
+    return numericEnvValue;
   }
 
   return envValue;
