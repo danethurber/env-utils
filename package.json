@@ -42,5 +42,12 @@
     "ts-jest": "27.1.2",
     "ts-node": "10.4.0",
     "typescript": "4.5.4"
-  }
+  },
+  "files": [
+    "lib",
+    "package.json",
+    "yarn.lock",
+    "README.md",
+    "CHANGELOG.md"
+  ]
 }
