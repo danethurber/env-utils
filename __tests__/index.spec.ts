@@ -96,7 +96,7 @@ describe('@bolajiolajide/env-utils', () => {
     });
   });
 
-  describe.skip('non-development environment', () => {
+  describe('non-development environment', () => {
     beforeEach(() => {
       jest.resetModules() // Most important - it clears the cache
       process.env = {
@@ -110,8 +110,14 @@ describe('@bolajiolajide/env-utils', () => {
       process.env = OLD_ENV; // Restore old environment
     });
 
-    test('expect true to be true', (done) => {
-      expect(true).toBe(true);
+    test('throws an error if the key does not exist and there\'s no devDefault', (done) => {
+      expect(() => getEnvVar('UNDEFINED_KEY')).toThrowError('key: "UNDEFINED_KEY" is undefined');
+
+      done();
+    });
+
+    test('throws an error if the key does not exist and there\'s devDefault', (done) => {
+      expect(() => getEnvVar('UNDEFINED_KEY', { devDefault: 'stuff' })).toThrowError('key: "UNDEFINED_KEY" is undefined');
 
       done();
     });
