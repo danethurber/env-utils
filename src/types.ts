@@ -6,4 +6,5 @@ export interface EnvOptions {
   optional?: boolean;
   commaSeparated?: boolean;
   isNumber?: boolean;
+  commaSeparator?: string;
 }
