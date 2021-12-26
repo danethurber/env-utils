@@ -8,35 +8,33 @@ import pkg from './package.json';
 const extensions = ['.ts'];
 
 export default {
-	input: 'src/index.ts',
-	plugins: [
-		nodeResolve({
-			extensions
-		}),
-		babel({
-			extensions,
-			babelHelpers: 'bundled',
-			exclude: 'node_modules/**'
-		}),
-		terser()
-	],
-	output: [
-		{
-			file: pkg.main,
-			format: 'cjs',
-			exports: 'default',
-			sourcemap: true
-		},
-		{
-			file: pkg.module,
-			format: 'es',
-			sourcemap: true
-		},
-		{
-			name: pkg.name,
-			file: pkg.umd,
-			format: 'umd',
-			sourcemap: true
-		}
-	]
+  input: 'src/index.ts',
+  plugins: [
+    nodeResolve({ extensions }),
+    babel({
+      extensions,
+      babelHelpers: 'bundled',
+      exclude: 'node_modules/**'
+    }),
+    terser()
+  ],
+  output: [
+    {
+      file: pkg.main,
+      format: 'cjs',
+      exports: 'auto',
+      sourcemap: true
+    },
+    {
+      file: pkg.module,
+      format: 'es',
+      sourcemap: true
+    },
+    {
+      name: pkg.name,
+      file: pkg.umd,
+      format: 'umd',
+      sourcemap: true
+    }
+  ]
 };
