@@ -1,13 +1,11 @@
 # ENV Utils
 
-[![Circle CI](https://circleci.com/gh/danethurber/env-utils.svg?style=shield)](https://circleci.com/gh/danethurber/env-utils)
-
 Easily Get Environment Variables
 
 ## Install
 
 ```sh
-$ npm install env-utils
+yarn add @bolajiolajide/env-utils
 ```
 
 ## Methods
