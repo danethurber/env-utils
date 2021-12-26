@@ -1,33 +1,112 @@
-# This workflow will do a clean install of node dependencies, cache/restore them, build the source code and run tests across different versions of node
-# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
-
-name: Env Util CI
+name: Env Util CI (Pull Requests)
 
 on:
-  push:
-    branches: [ main ]
   pull_request:
     branches: [ main ]
 
+env:
+  NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+
 jobs:
-  build:
+  setup:
+    runs-on: ubuntu-18.04
 
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Use Node.js 16.x
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16.x
+
+      - uses: actions/cache@v2
+        with:
+          path: "**/node_modules"
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+
+      - name: Install dependencies
+        run: yarn
+
+  test:
+    needs: setup
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [12.x, 14.x, 16.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
     - uses: actions/checkout@v2
-    
-    - name: Use Node.js ${{ matrix.node-version }}
+
+    - name: Use Node.js 14.x
       uses: actions/setup-node@v2
       with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'yarn'
-        
-    - run: yarn
-    
-    - run: yarn test
+        node-version: 14.x
+
+    - name: Load node_modules
+      uses: actions/cache@v2
+      with:
+        path: '**/node_modules'
+        key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+
+    - name: Run tests
+      run: yarn test
+
+  publish_pre_release:
+    name: "Publish new alpha version"
+    needs: test
+    runs-on: ubuntu-latest
+
+    if: github.repository_owner != 'BolajiOlajide' && github.ref != 'refs/heads/main'
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Use Node.js 14.x
+      uses: actions/setup-node@v2
+      with:
+        node-version: 14.x
+
+    # In order to make a commit, we need to initialize a user.
+    # You may choose to write something less generic here if you want, it doesn't matter functionality wise.
+    - name: Initialize mandatory git config
+      run: |
+        git config user.name "BolajiOlajide"
+        git config user.email "25608335+BolajiOlajide@users.noreply.github.com"
+
+    - name: Bump Prerelease version
+      run: yarn version --prerelease --preid alpha-${GITHUB_RUN_ID}
+
+    - name: get-npm-version
+      id: package-version
+      uses: martinbeentjes/npm-get-version-action@master
+
+    - run: yarn publish
+      env:
+        NODE_AUTH_TOKEN: NPM_AUTH_TOKEN
+
+    - name: Comment PR
+      uses: thollander/actions-comment-pull-request@v1
+      with:
+        message: 'Install with: `yarn add @bolajiolajide/env-utils@${{ steps.package-version.outputs.current-version}}`'
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+
+  # publish:
+  #   name: "Publish new patch version"
+  #   needs: test
+  #   runs-on: ubuntu-latest
+
+  #   if: github.repository_owner == 'BolajiOlajide' && github.ref == 'refs/heads/main'
+
+    # steps:
+    # - uses: actions/checkout@v2
+
+    # - name: Use Node.js 14.x
+    #   uses: actions/setup-node@v2
+    #   with:
+    #     node-version: 14.x
+
+  #   - name: Load node_modules
+  #     uses: actions/cache@v2
+  #     with:
+  #       path: '**/node_modules'
+  #       key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+
+  #   - name: Publish to npm
